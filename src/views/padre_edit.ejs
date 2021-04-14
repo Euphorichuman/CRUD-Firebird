@@ -1,0 +1,25 @@
+<% include partials/_header %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-5 offset-md-3 card">
+      <div class="card-body">
+        <form action="/updatepadre/<%= data.id %>" method="POST">
+          <div class="form-group">
+            <input type="number" name="id" value="<%= data.id%>" placeholder="Identificación" class="form-control" autofocus>
+          </div>
+          <br>
+          <div class="form-group">
+            <input type="text" name="nom" value="<%= data.nom%>" placeholder="Nombre" class="form-control">
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary">
+            Actualizar padre
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include partials/_footer %>

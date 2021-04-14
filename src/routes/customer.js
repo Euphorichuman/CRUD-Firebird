@@ -11,7 +11,7 @@ const padreController = require('../controllers/padreController');
 //Se pide la conexión con la base de datos
 router.get('/',function(req,res){
 	var conn = fb.createConnection();
-	conn.connect('../BIENESTAR2.GDB','SYSDBA','root','',function(err){
+	conn.connect('../BIENESTAR.GDB','SYSDBA','root','',function(err){
 		var r = {
 			err: err?err.message:null,
 			connected: conn.connected  
@@ -24,7 +24,7 @@ router.get('/',function(req,res){
 
 router.get('/hijos',function(req,res){
     var conn = fb.createConnection();
-    conn.connect('../BIENESTAR2.GDB','SYSDBA','root','',function(err){
+    conn.connect('../BIENESTAR.GDB','SYSDBA','root','',function(err){
       conn.query('SELECT * FROM hijo', function(err, hijo) {
         if (err) {
           res.json(err);

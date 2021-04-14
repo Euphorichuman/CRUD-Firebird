@@ -1,5 +1,6 @@
 var options = {};
- 
+
+//Se configura la conexión con la base de datos
 options.host = '127.0.0.1';
 options.port = 3050;
 options.database = 'bienestar2';

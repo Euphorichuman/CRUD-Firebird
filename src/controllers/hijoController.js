@@ -1,14 +1,18 @@
+var fb  = require("firebird");
+
 const controller = {};
 
-controller.listHijo = (req, res) => {
-  req.getConnection((err, conn) => {
+controller.list = (req, res) => {
+  var conn = fb.createConnection();
+  conn.connect('../BIENESTAR2.GDB','SYSDBA','root','',function(err){
     conn.query('SELECT * FROM hijo', (err, hijo) => {
-     if (err) {
-      res.json(err);
-     }
-     res.render('hijo', {
+      if (err) {
+        res.json(err);
+      }
+      console.log(hijo);
+      res.render('hijo', {
         data: hijo
-     });
+      });
     });
   });
 };

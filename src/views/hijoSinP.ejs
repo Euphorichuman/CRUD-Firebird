@@ -6,11 +6,10 @@
       <table class="table table-bordered table-hover">
         <thead>
           <tr>
-            <td>n°</td>
+            <td>N°</td>
             <td>Identificación</td>
             <td>Nombre</td>
-            <td>Id del padre</td>
-            <td>Actions</td>
+            <td>Opciones</td>
           </tr>
         </thead>
         <tbody>
@@ -20,7 +19,6 @@
                 <td><%= (i + 1) %></td>
                 <td><%= data[i].ID %></td>
                 <td><%= data[i].NOM %></td>
-                <td><%= data[i].HIJODE %></td>
                 <td>
                   <a href="/updatehijo/<%= data[i].ID %>" class="btn btn-primary">Editar</a>
                   <a href="/deletehijo/<%= data[i].ID %>" class="btn btn-danger">Borrar</a>

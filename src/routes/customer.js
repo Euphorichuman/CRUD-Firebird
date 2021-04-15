@@ -7,7 +7,7 @@ const router = express.Router();
 const hijoController = require('../controllers/hijoController');
 const padreController = require('../controllers/padreController');
 
-//Se pide la conexión con la base de datos y se muestra el main
+//Se pide la conexión con la base de datos y se muestra el inicio de la aplicación
 router.get('/',function(req,res){
 	var conn = fb.createConnection();
 	conn.connect(db,'SYSDBA','root','',function(err){

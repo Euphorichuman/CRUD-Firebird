@@ -2,7 +2,14 @@ const { Router } = require('express');
 const express = require('express');
 var fb  = require("firebird");
 const router = express.Router();
-
+function reportError(res,err)
+{
+    if(err){
+        res.end(JSON.stringify({err: err.message}));
+        return true;
+    }
+    return false;
+}
 //
 const hijoController = require('../controllers/hijoController');
 const padreController = require('../controllers/padreController');
@@ -11,7 +18,7 @@ const padreController = require('../controllers/padreController');
 //Se pide la conexión con la base de datos
 router.get('/',function(req,res){
 	var conn = fb.createConnection();
-	conn.connect('../BIENESTAR2.GDB','SYSDBA','root','',function(err){
+	conn.connect('./BIENESTAR2.GDB','SYSDBA','root','',function(err){
 		var r = {
 			err: err?err.message:null,
 			connected: conn.connected  
@@ -24,32 +31,15 @@ router.get('/',function(req,res){
 
 router.get('/hijos',function(req,res){
     var conn = fb.createConnection();
-    conn.connect('../BIENESTAR2.GDB','SYSDBA','root','',function(err){
-      conn.query('SELECT * FROM hijo', function(err, hijo) {
+    conn.connect('./BIENESTAR2.GDB','SYSDBA','root','',function(err){
+      conn.query('SELECT * FROM hijo', (err, hijo) => {
         if (err) {
           res.json(err);
         }
-
-        var first = true;
-        hijo.fetch('all',true,function(obj){
-            var fields = [],fr = [];
-             for(var f in obj){
-              fields.push(f);
-              fr.push(obj[f]);
-             };
-
-             console.log(JSON.stringify(obj))
-             res.render('hijo', {
-                data: obj
-              });
-        },
-        function(err,eof){
-            if(reportError(res,err)) return;
-            if(first) {
-              res.end('"fields":[],"data":[]}');
-              return;
-            }
-            res.end(']}');
+        var data = hijo.fetchSync('all',true);
+        console.log(data);
+        res.render('hijo', {
+          data:  data
         });
       });
     });

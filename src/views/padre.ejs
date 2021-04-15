@@ -17,11 +17,11 @@
             <% for(var i = 0; i < data.length; i++) { %>
               <tr>
                 <td><%= (i + 1) %></td>
-                <td><%= data[i].id %></td>
-                <td><%= data[i].nom %></td>
+                <td><%= data[i].ID %></td>
+                <td><%= data[i].NOM %></td>
                 <td>
-                  <a href="/updatepadre/<%= data[i].id %>" class="btn btn-primary">Editar</a>
-                  <a href="/deletepadre/<%= data[i].id %>" class="btn btn-danger">Borrar</a>
+                  <a href="/updatepadre/<%= data[i].ID %>" class="btn btn-primary">Editar</a>
+                  <a href="/deletepadre/<%= data[i].ID %>" class="btn btn-danger">Borrar</a>
                 </td>
               </tr>
             <% } %>

@@ -45,7 +45,22 @@ router.get('/hijos',function(req,res){
     });
 });
 
-// router.get('/hijos', hijoController.listHijo);
+router.get('/padres',function(req,res){
+  var conn = fb.createConnection();
+  conn.connect('./BIENESTAR2.GDB','SYSDBA','root','',function(err){
+    conn.query('SELECT * FROM padre', (err, hijo) => {
+      if (err) {
+        res.json(err);
+      }
+      var data = hijo.fetchSync('all',true);
+      console.log(data);
+      res.render('hijo', {
+        data:  data
+      });
+    });
+  });
+});
+
 // router.post('/addhijo', hijoController.saveHijo);
 // router.get('/updatehijo/:id', hijoController.editHijo);
 // router.post('/updatehijo/:id', hijoController.updateHijo);

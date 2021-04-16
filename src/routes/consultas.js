@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const express = require('express');
 var fb  = require("firebird");
-var db = require("../config");
 const router = express.Router();
 
 const consultasController = require('../controllers/consultasControllers');

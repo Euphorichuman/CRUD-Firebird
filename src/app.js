@@ -7,7 +7,7 @@ var fb  = require("firebird");
 const app = express();
 
 // settings
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 3500);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 

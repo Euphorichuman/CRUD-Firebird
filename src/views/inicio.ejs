@@ -1,10 +1,88 @@
 <% include partials/_header %>
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <main class="px-3">
-    <h1>Bases de datos - CRUD Firebird</h1>
-    <p class="lead">Conexión establecida con la base de datos</p>
-  </main>
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <main class="px-3">
+      <% if (data) { %>
+        <p class="lead" style="text-align: center;">Estado de conexión con la base de datos: <span class="lead"
+            style="color:green"><b>Establecida.</b></span></p>
+        <% } else { %>
+          <p class="lead" style="text-align: center;">Estado de conexión con la base de datos: <span class="lead"
+              style="color:red"><b>No
+                establecida.</b></span></p>
+          <% } %>
+    </main>
 
-</div>
+  </div>
 
-<% include partials/_footer %>
+  <% if (data) { %>
+    <div class="container">
+      <div class="card-deck mt-3">
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+              <div class="card-header" style="text-align: center;">Hijos</div>
+              <div class="card-body">
+                <p class="card-text">Aquí puede crear, editar, eliminar datos en el listado de hijos.</p>
+                <a type="button" class="btn btn-light" href="/hijos">Información</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+              <div class="card-header" style="text-align: center;">Padres</div>
+              <div class="card-body">
+                <p class="card-text">Aquí puede crear, editar, eliminar datos en el listado de padres.</p>
+                <a type="button" class="btn btn-light" href="/padres">Información</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+              <div class="card-header" style="text-align: center;">Consultas</div>
+              <div class="card-body">
+
+                <p class="card-text">Aquí puede realizar diferentes consultas a la base de datos.</p>
+
+                <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Consultas
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+
+                        <table class="table">
+                          <tbody>
+                            <tr>
+                              <td> <a href="/Consultas/Seleciconarpadre">Hijos de padre escogido</a></td>
+                            </tr>
+                            <tr>
+                              <td> <a href="/Consultas/padresSinH">Padres sin hijos</a></td>
+                            </tr>
+                            <tr>
+                              <td> <a href="/Consultas/HijosSinP">Hijos sin padres</a></td>
+                            </tr>
+                            <tr>
+                              <td> <a href="/Consultas/PadresNumH">Número de hijos</a></td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+      <% include partials/_footer %>

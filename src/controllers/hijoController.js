@@ -6,7 +6,7 @@ const controller = {};
 //Se listan los hijos
 controller.listHijo = (req, res) => {
   var conn = fb.createConnection();
-  conn.connect(db,'SYSDBA','root','',function(err){
+  conn.connect(db.database, db.user,db.password, db.role, function(err){
     conn.query('SELECT * FROM hijo', (err, hijo) => {
       if (err) {
         res.json(err);
@@ -24,7 +24,7 @@ controller.saveHijo = (req, res) => {
     const data = req.body;
     
       var conn = fb.createConnection();
-      conn.connect(db,'SYSDBA','root','',function(err){
+      conn.connect(db.database, db.user,db.password, db.role, function(err){
         if (data.hijode.length == 0) {
           conn.querySync(`INSERT INTO hijo (ID,NOM) values (${data.id}, '${data.nom}')`);
           conn.commitSync();
@@ -42,7 +42,7 @@ controller.editHijo = (req, res) => {
   const {id} = req.params;
   
   var conn = fb.createConnection();
-  conn.connect(db,'SYSDBA','root','',function(err){
+  conn.connect(db.database, db.user,db.password, db.role, function(err){
     conn.query(`SELECT * FROM hijo WHERE ID=${id}`, (err, hijo) => {
       if (err) {
         res.json(err);
@@ -60,7 +60,7 @@ controller.updateHijo = (req, res) => {
   const {id} = req.params;
   const newHijo = req.body;
   var conn = fb.createConnection();
-    conn.connect(db,'SYSDBA','root','',function(err){
+    conn.connect(db.database, db.user,db.password, db.role,function(err){
         conn.querySync(`UPDATE hijo SET ID=${newHijo.id},NOM='${newHijo.nom}',HIJODE=${newHijo.hijode} WHERE ID=${id}`);
         conn.commitSync();
         res.redirect('/hijos');
@@ -71,7 +71,7 @@ controller.updateHijo = (req, res) => {
 controller.deleteHijo = (req, res) => {
   const {id} = req.params;
   var conn = fb.createConnection();
-    conn.connect(db,'SYSDBA','root','',function(err){
+    conn.connect(db.database, db.user,db.password, db.role, function(err){
         conn.querySync(`DELETE FROM hijo WHERE ID=${id}`);
         conn.commitSync();
         res.redirect('/hijos');

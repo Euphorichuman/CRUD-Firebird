@@ -7,7 +7,7 @@ const controller = {};
 // Se muestran los padres sin hijos
 controller.listPadreSinH = (req, res) => {
   var conn = fb.createConnection();
-  conn.connect(db, 'SYSDBA', 'root', '', function (err) {
+  conn.connect(db.database, db.user,db.password, db.role, function (err) {
     conn.query('SELECT * FROM padre P WHERE NOT EXISTS (SELECT NULL FROM hijo H WHERE H.HIJODE=P.ID)', (err, hijo) => {
       if (err) {
         res.json(err);
@@ -23,7 +23,7 @@ controller.listPadreSinH = (req, res) => {
 // Se muestran los padres sin hijos no terminado
 controller.listPadreNumH = (req, res) => {
   var conn = fb.createConnection();
-  conn.connect(db, 'SYSDBA', 'root', '', function (err) {
+  conn.connect(db.database, db.user,db.password, db.role, function (err) {
     var padre = conn.querySync(`SELECT * FROM padre`);
     var data = padre.fetchSync('all', true);
     conn.commitSync();
@@ -42,7 +42,7 @@ controller.listPadreNumH = (req, res) => {
 // Se muestran los padres para seleccionar uno y mostrar sus hijos asociados
 controller.listPadre = (req, res) => {
   var conn = fb.createConnection();
-  conn.connect(db, 'SYSDBA', 'root', '', function (err) {
+  conn.connect(db.database, db.user,db.password, db.role, function (err) {
     conn.query('SELECT * FROM padre', (err, padre) => {
       if (err) {
         res.json(err);
@@ -60,7 +60,7 @@ controller.ListHijoPadre = (req, res) => {
   const { id } = req.params;
 
   var conn = fb.createConnection();
-  conn.connect(db, 'SYSDBA', 'root', '', function (err) {
+  conn.connect(db.database, db.user,db.password, db.role, function (err) {
     conn.query(`SELECT * FROM hijo WHERE HIJODE=${id}`, (err, hijo) => {
       if (err) {
         res.json(err);
@@ -76,7 +76,7 @@ controller.ListHijoPadre = (req, res) => {
 // Se muestran los hijos que no tienen un padre asociado
 controller.ListHijoSinPadre = (req, res) => {
   var conn = fb.createConnection();
-  conn.connect(db, 'SYSDBA', 'root', '', function (err) {
+  conn.connect(db.database, db.user,db.password, db.role, function (err) {
     conn.query(`SELECT * FROM hijo WHERE HIJODE IS NULL`, (err, hijo) => {
       if (err) {
         res.json(err);

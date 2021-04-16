@@ -10,15 +10,19 @@ const padreController = require('../controllers/padreController');
 //Se pide la conexión con la base de datos y se muestra el inicio de la aplicación
 router.get('/',function(req,res){
 	var conn = fb.createConnection();
-	conn.connect(db,'SYSDBA','root','',function(err){
+	conn.connect(db.database, db.user, db.password, db.role, function(err){
 		var r = {
 			err: err?err.message:null,
 			connected: conn.connected  
 		};
-		res.render('inicio')
+		res.render('inicio', {
+			data: true
+		})
 	})
 	
-	conn.on('error',function(){res.send('<h1>Conexión invalida</h1>')});
+	conn.on('error',function(){res.render('inicio', {
+		data: false
+	})});
 });
 
 //Rutas Hijos

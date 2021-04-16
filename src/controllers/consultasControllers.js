@@ -1,5 +1,4 @@
 var fb = require("firebird");
-const { lastIndexOf } = require("../config");
 var db = require("../config");
 
 const controller = {};
